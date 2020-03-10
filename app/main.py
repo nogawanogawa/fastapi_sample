@@ -1,9 +1,12 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
+from pydantic import BaseModel
 
 app = FastAPI()
 
-fake_items_db = [{"item_name": "Foo"}, {
-    "item_name": "Bar"}, {"item_name": "Baz"}]
+
+class Item(BaseModel):
+    name: str
+    price: float
 
 
 @app.get("/")
@@ -19,3 +22,13 @@ async def read_item(item_id):
 @app.get("/query/")
 async def query_parameter(skip: int):
     return {"skip": skip}
+
+
+@app.post("/request/")
+async def create_item(item: Item):
+    return item
+
+
+@app.post("/uploadfile/")
+async def create_upload_file(file: UploadFile = File(...)):
+    return {"filename": file.filename}

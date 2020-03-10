@@ -1,7 +1,8 @@
 version: "3.7"
 services:
   fastapi:
-    image: tiangolo/uvicorn-gunicorn-fastapi:python3.7
+    #image: tiangolo/uvicorn-gunicorn-fastapi:python3.7
+    build: .
     volumes:
       - ./app:/app
     ports:
