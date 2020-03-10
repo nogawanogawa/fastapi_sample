@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  fastapi:
+    image: tiangolo/uvicorn-gunicorn-fastapi:python3.7
+    volumes:
+      - ./app:/app
+    ports:
+      - "80:80"
+    environment:
+      TZ: "Asia/Tokyo"
+    command: /start.sh
